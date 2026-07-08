@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GitHub OSINT</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="GitHub OSINT">
+        <img class="brand-mark" src="../../assets/icon-32.png" alt="">
+        <span class="brand-name">GitHub OSINT</span>
+      </div>
+      <div class="top-actions">
+        <button class="icon-button" id="refresh" type="button" title="Refresh all sources" aria-label="Refresh all sources">
+          <svg viewBox="0 0 24 24"><path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 4v5h5M4 13a8.1 8.1 0 0 0 15.5 2M20 20v-5h-5"/></svg>
+        </button>
+        <button class="icon-button" id="export" type="button" disabled title="Export evidence as JSON" aria-label="Export evidence as JSON">
+          <svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>
+        </button>
+        <button class="icon-button" id="settings" type="button" title="Settings" aria-label="Open settings">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3A1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></svg>
+        </button>
+        <button class="icon-button" id="close" type="button" title="Close" aria-label="Close GitHub OSINT">
+          <svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main" aria-live="polite">
+      <section class="empty-state" id="empty">
+        <div class="scope-graphic"><span></span></div>
+        <p class="eyebrow">WAITING FOR TARGET</p>
+        <h1>Open a GitHub profile or repository</h1>
+        <p>GitHub OSINT will resolve the current page into public-source evidence, including restricted-target traces.</p>
+      </section>
+
+      <section class="loading-state hidden" id="loading">
+        <div class="scanner"><i></i></div>
+        <p class="eyebrow">COLLECTING PUBLIC SIGNALS</p>
+        <h1 id="loading-target">Resolving target</h1>
+        <ul class="loading-steps">
+          <li class="active">Entity metadata</li><li>Identity evidence</li><li>Repository history</li><li>Source provenance</li>
+        </ul>
+      </section>
+
+      <section class="error-state hidden" id="error">
+        <span class="error-code">COLLECTION INTERRUPTED</span>
+        <h1>GitHub OSINT could not finish</h1>
+        <p id="error-message"></p>
+        <div class="rate-limit-help hidden" id="error-help"></div>
+        <button class="primary-button" id="retry" type="button">Try again</button>
+      </section>
+
+      <section class="results hidden" id="results">
+        <div class="identity" id="identity"></div>
+        <div class="metrics" id="metrics"></div>
+        <nav class="tabs" aria-label="Investigation sections">
+          <button type="button" data-tab="overview" class="active">Overview</button>
+          <button type="button" data-tab="identity">Identity</button>
+          <button type="button" data-tab="technical">Technical</button>
+          <button type="button" data-tab="sources">Sources</button>
+        </nav>
+        <div class="tab-content" id="tab-content"></div>
+      </section>
+    </main>
+
+    <footer class="developer-footer">
+      <span class="api-status"><i></i><span id="rate-status">Ready for public API requests</span></span>
+      <span class="developer-credit">Developed by&nbsp;<a href="https://avenyx.io" target="_blank" rel="noreferrer">Avenyx</a>.</span>
+    </footer>
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+  <script type="module" src="panel.js"></script>
+</body>
+</html>

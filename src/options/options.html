@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GitHub OSINT settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main class="settings-shell">
+    <header>
+      <img class="mark" src="../../assets/icon-48.png" alt="">
+      <div><p class="eyebrow">GITHUB OSINT CONFIGURATION</p><h1>Collection settings</h1><p>Control request depth and optional authentication. Findings never leave your browser.</p></div>
+    </header>
+    <form id="settings-form">
+      <section>
+        <div class="section-title"><div><h2>GitHub API token</h2><p>Optional. Raises rate limits.</p></div><span class="optional">OPTIONAL</span></div>
+        <label for="token">Fine-grained personal access token</label>
+        <div class="secret-row"><input id="token" name="token" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…"><button id="reveal" type="button">SHOW</button></div>
+        <div class="github-notice">
+          <strong>This limit comes from GitHub—not GitHub OSINT.</strong>
+          <p>GitHub allows fewer requests without authentication. Create a fine-grained token with public-repository read access and no write permissions. Restricted-target fallback searches always ignore this token so authorized private data cannot enter OSINT results.</p>
+          <div class="help-links"><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noreferrer">Create a fine-grained token on GitHub ↗</a><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens" target="_blank" rel="noreferrer">GitHub's token instructions ↗</a></div>
+        </div>
+      </section>
+      <section>
+        <div class="section-title"><div><h2>Repository scan</h2><p>Deeper scans improve historical email coverage and consume more API requests.</p></div></div>
+        <label for="commit-depth">Recent commits to inspect</label>
+        <select id="commit-depth" name="commitDepth">
+          <option value="25">25 · quick scan</option><option value="100">100 · balanced</option><option value="300">300 · deep</option><option value="500">500 · maximum</option>
+        </select>
+        <label for="cache-minutes">Evidence cache duration</label>
+        <select id="cache-minutes" name="cacheMinutes">
+          <option value="1">1 minute</option><option value="5">5 minutes</option><option value="15">15 minutes</option><option value="60">60 minutes</option>
+        </select>
+        <label class="check-row"><input id="auto-open" name="autoOpen" type="checkbox"><span><strong>Open investigator automatically</strong><small>Open the drawer when a supported GitHub page loads.</small></span></label>
+        <label class="check-row"><input id="external-osint" name="externalOsint" type="checkbox"><span><strong>Query external public indexes</strong><small>For restricted targets, send the owner/repository string to grep.app and the Internet Archive to find public code references and historical captures.</small></span></label>
+      </section>
+      <div class="form-actions"><span id="save-status" role="status"></span><button class="save" type="submit">Save settings</button></div>
+    </form>
+    <footer class="developer-footer">Developed by&nbsp;<a href="https://avenyx.io" target="_blank" rel="noreferrer">Avenyx</a>.</footer>
+  </main>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

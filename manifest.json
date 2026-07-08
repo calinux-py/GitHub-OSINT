@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub OSINT",
+  "version": "1.3.0",
+  "description": "A public-source GitHub investigator for profiles, repositories, and restricted targets, with evidence provenance.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://api.github.com/*",
+    "https://grep.app/*",
+    "https://web.archive.org/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["src/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Open GitHub OSINT",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "assets/icon-16.png",
+      "32": "assets/icon-32.png",
+      "48": "assets/icon-48.png",
+      "128": "assets/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icon-16.png",
+    "32": "assets/icon-32.png",
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  },
+  "options_page": "src/options/options.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["src/panel/panel.html", "src/panel/panel.css", "src/panel/panel.js", "assets/icon-16.png", "assets/icon-32.png", "assets/icon-48.png", "assets/icon-128.png"],
+      "matches": ["https://github.com/*"]
+    }
+  ]
+}
